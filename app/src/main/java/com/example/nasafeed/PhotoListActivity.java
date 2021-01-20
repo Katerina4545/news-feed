@@ -2,10 +2,12 @@ package com.example.nasafeed;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -14,8 +16,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.davemorrissey.labs.subscaleview.ImageSource;
 import com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView;
 import com.example.nasafeed.api.model.PhotoDTO;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.listener.SimpleImageLoadingListener;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,6 +57,7 @@ public class PhotoListActivity extends AppCompatActivity {
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         recyclerView.setAdapter(adapter);
+
 
         App app = (App) getApplication();
 
@@ -107,15 +114,29 @@ public class PhotoListActivity extends AppCompatActivity {
 
         TextView text;
         PhotoDTO photo;
+        //Bitmap bitmap;
+        //SubsamplingScaleImageView imageView;
+        ImageView imageView;
 
         public PhotoItemViewHolder(@NonNull View itemView) {
             super(itemView);
             text = (TextView) itemView.findViewById(R.id.text);
+            imageView = (ImageView) itemView.findViewById(R.id.image);
         }
 
         public void bind(PhotoDTO photo) {
             this.photo = photo;
             text.setText(photo.getDate() + "\n" + photo.getCaption() + "\n" + photo.getIdentifier());
+            Picasso.with(itemView.getContext())
+                    .load(photo.getImageUrl())
+                    .into(imageView);
+            /*ImageLoader.getInstance().loadImage(photo.getImageUrl(), new SimpleImageLoadingListener() {
+                @Override
+                public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
+                    bitmap = loadedImage;
+                    imageView.setImage(ImageSource.cachedBitmap(loadedImage));
+                }
+            });*/
         }
     }
 

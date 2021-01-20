@@ -16,7 +16,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class NasaService {
     //спец ключ для обращения к серверу, позволяет совершать до 1000 запросов/сутки
-    public static String KEY = "cfpxftjqccQbNxFWLSglQafdDGsFvE7sVMlGAfxo";
+    public static String KEY = "eH60FsoFsJssF5NdArh6hMl5uHuVX8bokdXSzm9V";
 
     NasaApi api;
 

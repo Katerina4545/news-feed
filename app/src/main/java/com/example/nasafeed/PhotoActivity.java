@@ -35,8 +35,6 @@ public class PhotoActivity extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         imageView = view.findViewById(R.id.image);
-        toolbar = view.findViewById(R.id.toolbar);
-        toolbar.setTitle("");
 
         ImageLoader.getInstance().loadImage(EXTRA_URL, new SimpleImageLoadingListener() {
             @Override
@@ -44,7 +42,6 @@ public class PhotoActivity extends Fragment {
 
                     photo = loadedImage;
                     imageView.setImage(ImageSource.cachedBitmap(loadedImage));
-                    view.findViewById(R.id.progress).setVisibility(View.GONE);
 
             }
         });
